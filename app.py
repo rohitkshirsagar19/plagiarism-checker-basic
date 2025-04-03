@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.similarity import calculate_similarity
+from similarity import calculate_similarity
 import PyPDF2
 import docx
 import os
@@ -52,11 +52,11 @@ with tab1:
 with tab2:
     col1, col2 = st.columns(2)
     with col1:
-        file1 = st.file_uploader("Upload first file:", 
-                               type=["txt", "pdf", "docx"])
+        file1 = st.file_uploader("Upload first file:",
+                                 type=["txt", "pdf", "docx"])
     with col2:
-        file2 = st.file_uploader("Upload second file:", 
-                               type=["txt", "pdf", "docx"])
+        file2 = st.file_uploader("Upload second file:",
+                                 type=["txt", "pdf", "docx"])
     file_btn = st.button("Check Similarity (Files)")
 
 # Process inputs
@@ -64,7 +64,6 @@ if text_btn and text1 and text2:
     with st.spinner("Calculating..."):
         similarity = calculate_similarity(text1, text2)
         st.success(f"Similarity: {similarity}%")
-        
         # Visual indicator
         st.progress(similarity/100)
         if similarity > 70:
@@ -78,11 +77,16 @@ elif file_btn and file1 and file2:
     with st.spinner("Processing files..."):
         text1 = extract_text_from_file(file1)
         text2 = extract_text_from_file(file2)
-        
         if text1 and text2:
             similarity = calculate_similarity(text1, text2)
             st.success(f"Similarity between {file1.name} and {file2.name}: {similarity}%")
             st.progress(similarity/100)
+            if similarity > 70:
+                st.error("⚠️ High similarity detected (potential plagiarism)")
+            elif similarity > 30:
+                st.warning("Moderate similarity detected")
+            else:
+                st.success("Low similarity detected")
         else:
             st.error("Could not extract text from files")
 
