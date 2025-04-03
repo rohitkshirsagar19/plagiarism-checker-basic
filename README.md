@@ -3,7 +3,8 @@
 *A lightweight plagiarism checker using TF-IDF and cosine similarity*
 
 ## 🎬 Live Demo  
-[![Open in Streamlit](https://img.shields.io/badge/Open%20in%20Streamlit-red?style=for-the-badge&logo=streamlit)](https://github.com/rohitkshirsagar19/plagiarism-checker-basic.git)
+[![Open in Streamlit](https://img.shields.io/badge/Open%20in%20Streamlit-red?style=for-the-badge&logo=streamlit)](https://plagiarism-checker-basic.streamlit.app/)
+
 
 
 ## 📌 Overview  
